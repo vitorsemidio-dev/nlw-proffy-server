@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import CreateUsersService from '../services/CreateUsersService';
+import CreateUsersService from '../../../services/CreateUsersService';
 
 const createUsersService = new CreateUsersService();
 
