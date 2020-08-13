@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
-const usersRouter = Router();
+import UsersController from '../controllers/UsersController';
 
-usersRouter.post('/users', (request, response) => {
-  console.log('users');
-  return response.status(201).send();
-});
+const usersRouter = Router();
+const usersController = new UsersController();
+
+usersRouter.post('/users', usersController.create);
 
 export default usersRouter;
