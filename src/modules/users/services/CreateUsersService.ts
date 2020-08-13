@@ -21,7 +21,7 @@ export default class CreateUsersService {
       throw new Error('Fail to create new user');
     }
 
-    const passwordHashed = this.hashProvider.generateHash(password);
+    const passwordHashed = await this.hashProvider.generateHash(password);
 
     const user = await db('users').insert<CreateUserDTO>({
       name,
