@@ -16,4 +16,4 @@ routes.get('/connections', connectionsController.index);
 
 routes.use(usersRouter);
 
-export default routes
+export default routes;
