@@ -28,6 +28,7 @@ export default class ClassesController {
     console.log(timeInMinutes);
 
     const classes = await db('classes')
+      // eslint-disable-next-line func-names
       .whereExists(function () {
         this.select('class_schedule.*')
           .from('class_schedule')
