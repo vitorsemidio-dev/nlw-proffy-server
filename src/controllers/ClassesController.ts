@@ -1,4 +1,4 @@
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 
 import db from '../database/connections';
 import convertHourToMinutes from '../utils/convertHourToMinutes';
@@ -28,7 +28,8 @@ export default class ClassesController {
     console.log(timeInMinutes);
 
     const classes = await db('classes')
-      .whereExists(function() {
+      // eslint-disable-next-line func-names
+      .whereExists(function () {
         this.select('class_schedule.*')
           .from('class_schedule')
           .whereRaw('`class_schedule`.`class_id` = `classes`.`id`')
@@ -39,11 +40,11 @@ export default class ClassesController {
       .where('classes.subject', '=', subject)
       .join('users', 'classes.user_id', '=', 'users.id')
       .select(['classes.*', 'users.*']);
-    
+
     return response.json(classes);
   }
 
-  async create (request: Request, response: Response): Promise<Response> {
+  async create(request: Request, response: Response): Promise<Response> {
     const {
       name,
       avatar,
@@ -54,25 +55,25 @@ export default class ClassesController {
       schedule,
     } = request.body;
     const trx = await db.transaction();
-  
+
     try {
       const insertedUsersIds = await trx('users').insert({
         name,
         avatar,
         whatsapp,
         bio,
-      })
-  
+      });
+
       const user_id = insertedUsersIds[0];
-  
+
       const insertedClassesIds = await trx('classes').insert({
         subject,
         cost,
         user_id,
       });
-  
+
       const class_id = insertedClassesIds[0];
-  
+
       const classSchedule = schedule.map((scheduleItem: ScheduleItem) => {
         return {
           class_id,
@@ -81,18 +82,17 @@ export default class ClassesController {
           to: convertHourToMinutes(scheduleItem.to),
         };
       });
-  
+
       await trx('class_schedule').insert(classSchedule);
-  
+
       await trx.commit();
-  
+
       return response.status(201).send();
     } catch (err) {
       await trx.rollback();
       return response.status(400).json({
         error: 'Unexpected error while creating new class',
-      })
+      });
     }
   }
 }
-

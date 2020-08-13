@@ -9,7 +9,7 @@ export default class ConnectionsController {
     return response.json({
       total,
     });
-  };
+  }
 
   async create(request: Request, response: Response): Promise<Response> {
     const { user_id } = request.body;
@@ -19,5 +19,5 @@ export default class ConnectionsController {
     });
 
     return response.status(201).send();
-  };
+  }
 }
