@@ -26,9 +26,7 @@ export default class CreateUsersService {
       );
     }
 
-    const trx = await db.transaction();
-
-    const data = {
+    const user = await db('users').insert<CreateUserDTO>({
       name,
       lastname,
       email,
@@ -36,21 +34,10 @@ export default class CreateUsersService {
       avatar: 'empty avatar',
       whatsapp: 'empty whatsapp',
       bio: 'empty bio',
-    };
-
-    const user = await trx.insert(data);
+    });
 
     console.log(user);
 
-    trx.commit();
-
-    return new Promise(resolve =>
-      resolve({
-        name,
-        lastname,
-        email,
-        password,
-      }),
-    );
+    return new Promise(resolve => resolve(user));
   }
 }
