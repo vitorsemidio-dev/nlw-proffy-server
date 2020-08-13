@@ -1,4 +1,4 @@
-import db from '../database/connections';
+import db from '../../../shared/infra/knex/connections';
 import CreateUserDTO from '../dtos/CreateUserDTO';
 
 export default class CreateUsersService {
