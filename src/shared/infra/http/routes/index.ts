@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import usersRouter from './routes/users.routes';
-import ClassesController from './controllers/ClassesController';
-import ConnectionsController from './controllers/ConnectionsController';
+import usersRouter from './users.routes';
+import ClassesController from '../../../../controllers/ClassesController';
+import ConnectionsController from '../../../../controllers/ConnectionsController';
 
 const routes = Router();
 const classesController = new ClassesController();
