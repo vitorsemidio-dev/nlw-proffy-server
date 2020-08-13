@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 
+import BCryptHashProvider from '../../../../../shared/container/providers/HashProvider/implementations/BCryptHashProvider';
 import CreateUsersService from '../../../services/CreateUsersService';
 
-const createUsersService = new CreateUsersService();
+const createUsersService = new CreateUsersService(new BCryptHashProvider());
 
 export default class UsersController {
   async create(request: Request, response: Response): Promise<Response> {
