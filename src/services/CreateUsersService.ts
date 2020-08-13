@@ -15,15 +15,7 @@ export default class CreateUsersService {
       .select();
 
     if (emailExists.length > 0) {
-      console.log('email already used');
-      return new Promise(resolve =>
-        resolve({
-          name,
-          email,
-          password,
-          lastname,
-        }),
-      );
+      throw new Error('Fail to create new user');
     }
 
     const user = await db('users').insert<CreateUserDTO>({
@@ -36,8 +28,6 @@ export default class CreateUsersService {
       bio: 'empty bio',
     });
 
-    console.log(user);
-
-    return new Promise(resolve => resolve(user));
+    return user;
   }
 }
