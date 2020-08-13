@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import usersRouter from './routes/users.routes';
 import ClassesController from './controllers/ClassesController';
 import ConnectionsController from './controllers/ConnectionsController';
 
@@ -12,5 +13,7 @@ routes.post('/classes', classesController.create);
 
 routes.post('/connections', connectionsController.create);
 routes.get('/connections', connectionsController.index);
+
+routes.use(usersRouter);
 
 export default routes;
