@@ -12,6 +12,6 @@ export async function down(knex: Knex): Promise<Knex.SchemaBuilder> {
   return knex.schema.table('users', table => {
     table.dropColumn('lastname');
     table.dropColumn('email');
-    table.string('password');
+    table.dropColumn('password');
   });
 }
