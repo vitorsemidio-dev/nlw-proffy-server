@@ -5,7 +5,7 @@ import ConnectionsController from '../controllers/ConnectionsController';
 const connectionsRouter = Router();
 const connectionsController = new ConnectionsController();
 
-connectionsRouter.post('/connections', connectionsController.create);
-connectionsRouter.get('/connections', connectionsController.index);
+connectionsRouter.post('/', connectionsController.create);
+connectionsRouter.get('/', connectionsController.index);
 
 export default connectionsRouter;

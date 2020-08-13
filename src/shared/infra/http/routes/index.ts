@@ -6,8 +6,8 @@ import connectionsRouter from '../../../../modules/classes/infra/http/routes/con
 
 const routes = Router();
 
-routes.use(usersRouter);
-routes.use(classesRouter);
-routes.use(connectionsRouter);
+routes.use('/users', usersRouter);
+routes.use('/classes', classesRouter);
+routes.use('/connections', connectionsRouter);
 
 export default routes;
