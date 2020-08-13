@@ -1,19 +1,13 @@
 import { Router } from 'express';
 
 import usersRouter from '../../../../modules/users/infra/http/routes/users.routes';
-import ClassesController from '../../../../controllers/ClassesController';
-import ConnectionsController from '../../../../controllers/ConnectionsController';
+import classesRouter from '../../../../modules/classes/infra/http/routes/classes.routes';
+import connectionsRouter from '../../../../modules/classes/infra/http/routes/connections.routes';
 
 const routes = Router();
-const classesController = new ClassesController();
-const connectionsController = new ConnectionsController();
-
-routes.get('/classes', classesController.index);
-routes.post('/classes', classesController.create);
-
-routes.post('/connections', connectionsController.create);
-routes.get('/connections', connectionsController.index);
 
 routes.use(usersRouter);
+routes.use(classesRouter);
+routes.use(connectionsRouter);
 
 export default routes;
