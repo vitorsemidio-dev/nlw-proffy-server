@@ -4,18 +4,15 @@ interface IRequest {
   name: string;
 }
 
-interface IResponse {
-  id: number;
-  name: string;
-}
-
 class CreateSubjectsService {
-  public async execute({ name }: IRequest): Promise<IResponse> {
-    const subject = await db('subjects').insert<IResponse>({
-      name,
-    });
-
-    return subject;
+  public async execute({ name }: IRequest): Promise<void> {
+    try {
+      await db('subjects').insert({
+        name,
+      });
+    } catch (err) {
+      throw new Error('Fail to create new subject');
+    }
   }
 }
 
