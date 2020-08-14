@@ -79,22 +79,23 @@ export default class ClassesController {
 
       // const class_id = insertedClassesIds[0];
 
-      const class_id = await createClassesService.execute({
+      await createClassesService.execute({
         user_id,
         subject_id,
         cost,
+        schedule,
       });
 
-      const classSchedule = schedule.map((scheduleItem: ScheduleItem) => {
-        return {
-          class_id,
-          week_day: scheduleItem.week_day,
-          from: convertHourToMinutes(scheduleItem.from),
-          to: convertHourToMinutes(scheduleItem.to),
-        };
-      });
+      // const classSchedule = schedule.map((scheduleItem: ScheduleItem) => {
+      //   return {
+      //     class_id,
+      //     week_day: scheduleItem.week_day,
+      //     from: convertHourToMinutes(scheduleItem.from),
+      //     to: convertHourToMinutes(scheduleItem.to),
+      //   };
+      // });
 
-      await db('class_schedule').insert(classSchedule);
+      // await db('class_schedule').insert(classSchedule);
 
       // await trx.commit();
 
