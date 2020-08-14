@@ -50,7 +50,7 @@ export default class ClassesController {
       avatar,
       whatsapp,
       bio,
-      subject,
+      subject_id,
       cost,
       schedule,
     } = request.body;
@@ -67,7 +67,7 @@ export default class ClassesController {
       const user_id = insertedUsersIds[0];
 
       const insertedClassesIds = await trx('classes').insert({
-        subject,
+        subject_id,
         cost,
         user_id,
       });
