@@ -44,11 +44,9 @@ export default class CreateClassesService {
       await trx('class_schedule').insert(classSchedule);
 
       trx.commit();
-
-      // return class_id;
     } catch (err) {
       trx.rollback();
-      throw new Error('Fail to create class');
+      throw new Error('Unexpected error while creating new class');
     }
   }
 }
