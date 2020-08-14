@@ -22,9 +22,24 @@ export default class CreateClassesService {
     cost,
     schedule,
   }: IRequest): Promise<void> {
-    // TODO: Check user_id/subject_id
-    // TODO: Cost positive
+    if (cost < 0) {
+      throw new Error('Negative Cost');
+    }
+
+    const userExists = await db('users').where('id', '=', user_id);
+
+    if (userExists.length === 0) {
+      throw new Error('Users does not exist');
+    }
+
+    const subjectExist = await db('subjects').where('id', '=', subject_id);
+
+    if (subjectExist.length === 0) {
+      throw new Error('Subject does not exist');
+    }
+
     const trx = await db.transaction();
+
     try {
       const [class_id] = await trx('classes').insert({
         user_id,
