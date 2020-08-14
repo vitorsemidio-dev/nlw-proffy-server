@@ -6,12 +6,6 @@ import CreateClassesService from '../../../services/CreateClassesService';
 
 const createClassesService = new CreateClassesService();
 
-interface ScheduleItem {
-  week_day: number;
-  from: string;
-  to: string;
-}
-
 export default class ClassesController {
   async index(request: Request, response: Response): Promise<Response> {
     const filters = request.query;
