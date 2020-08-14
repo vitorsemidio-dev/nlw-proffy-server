@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 
 import db from '../../../../../shared/infra/knex/connections';
 import convertHourToMinutes from '../../../../../utils/convertHourToMinutes';
+import CreateClassesService from '../../../services/CreateClassesService';
+
+const createClassesService = new CreateClassesService();
 
 interface ScheduleItem {
   week_day: number;
@@ -51,28 +54,36 @@ export default class ClassesController {
       whatsapp,
       bio,
       subject_id,
+      user_id,
       cost,
       schedule,
     } = request.body;
-    const trx = await db.transaction();
+    // const trx = await db.transaction();
+    console.log('here');
 
     try {
-      const insertedUsersIds = await trx('users').insert({
-        name,
-        avatar,
-        whatsapp,
-        bio,
-      });
+      // const insertedUsersIds = await trx('users').insert({
+      //   name,
+      //   avatar,
+      //   whatsapp,
+      //   bio,
+      // });
 
-      const user_id = insertedUsersIds[0];
+      // const user_id = insertedUsersIds[0];
 
-      const insertedClassesIds = await trx('classes').insert({
+      // const insertedClassesIds = await trx('classes').insert({
+      //   subject_id,
+      //   cost,
+      //   user_id,
+      // });
+
+      // const class_id = insertedClassesIds[0];
+
+      const class_id = await createClassesService.execute({
+        user_id,
         subject_id,
         cost,
-        user_id,
       });
-
-      const class_id = insertedClassesIds[0];
 
       const classSchedule = schedule.map((scheduleItem: ScheduleItem) => {
         return {
@@ -83,13 +94,13 @@ export default class ClassesController {
         };
       });
 
-      await trx('class_schedule').insert(classSchedule);
+      await db('class_schedule').insert(classSchedule);
 
-      await trx.commit();
+      // await trx.commit();
 
       return response.status(201).send();
     } catch (err) {
-      await trx.rollback();
+      // await trx.rollback();
       return response.status(400).json({
         error: 'Unexpected error while creating new class',
       });

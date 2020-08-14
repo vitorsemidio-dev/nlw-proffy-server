@@ -7,13 +7,19 @@ interface IRequest {
 }
 
 export default class CreateClassesService {
-  public async execute({ subject_id, user_id, cost }: IRequest): Promise<void> {
+  public async execute({ subject_id, user_id, cost }: IRequest): Promise<any> {
     // TODO: Check user_id/subject_id
     // TODO: Cost positive
-    await db('classes').insert({
-      user_id,
-      subject_id,
-      cost,
-    });
+    try {
+      const [class_id] = await db('classes').insert({
+        user_id,
+        subject_id,
+        cost,
+      });
+
+      return class_id;
+    } catch (err) {
+      throw new Error('Fail to create class');
+    }
   }
 }
