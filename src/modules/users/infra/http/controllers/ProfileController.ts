@@ -20,15 +20,21 @@ export default class ProfileController {
       lastname,
     } = request.body;
 
-    await updateUserProfileService.execute({
-      user_id,
-      name,
-      email,
-      password,
-      bio,
-      whatsapp,
-      lastname,
-    });
-    return response.status(201).send();
+    try {
+      await updateUserProfileService.execute({
+        user_id,
+        name,
+        email,
+        password,
+        bio,
+        whatsapp,
+        lastname,
+      });
+      return response.status(201).send();
+    } catch (err) {
+      return response.json({
+        message: err.message,
+      });
+    }
   }
 }
