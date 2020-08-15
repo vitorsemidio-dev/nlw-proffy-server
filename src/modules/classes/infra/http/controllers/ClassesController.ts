@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import db from '../../../../../shared/infra/knex/connections';
-import convertHourToMinutes from '../../../../../utils/convertHourToMinutes';
-import CreateClassesService from '../../../services/CreateClassesService';
+import db from '@shared/infra/knex/connections';
+import convertHourToMinutes from '@utils/convertHourToMinutes';
+import CreateClassesService from '@modules/classes/services/CreateClassesService';
 
 const createClassesService = new CreateClassesService();
 
