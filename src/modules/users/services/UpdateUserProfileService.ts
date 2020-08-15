@@ -11,10 +11,6 @@ interface IRequest {
   lastname: string;
 }
 
-interface User {
-  name: string;
-}
-
 export default class UpdateUserProfileService {
   constructor(private hashProvice: IHashProvider) {}
 
