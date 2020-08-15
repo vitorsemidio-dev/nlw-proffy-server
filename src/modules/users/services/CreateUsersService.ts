@@ -1,4 +1,5 @@
-import db from '../../../shared/infra/knex/connections';
+// import db from '../../../shared/infra/knex/connections';
+import db from '@shared/infra/knex/connections';
 import CreateUserDTO from '../dtos/CreateUserDTO';
 import IHashProvider from '../../../shared/container/providers/HashProvider/models/IHashProviders';
 
