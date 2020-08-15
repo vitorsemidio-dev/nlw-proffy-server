@@ -26,7 +26,7 @@ export default class UpdateUserProfileService {
     bio,
     whatsapp,
     lastname,
-  }: IRequest): Promise<User> {
+  }: IRequest): Promise<void> {
     const user = await db('users').where('id', '=', user_id).first();
 
     if (!user) {
