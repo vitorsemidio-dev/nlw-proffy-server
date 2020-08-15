@@ -10,17 +10,27 @@ export default class SessionsService {
   constructor(private hashProvider: IHashProvider) {}
 
   public async execute({ email, password }: IRequest): Promise<void> {
-    const userExist = db('users').where('email', '=', email);
-    console.log(userExist);
+    const user = await db
+      .select('*')
+      .from('users')
+      .where('email', email)
+      .first();
 
-    if (!userExist) {
+    // const userExist = db('users').where('email', '=', email);
+    console.log(user);
+
+    if (!user) {
       throw new Error('User/Password does not match');
     }
 
-    // const passwordHashed = await this.hashProvider.generateHash(password);
-    // const matchPassword = await this.hashProvider.compareHash(
-    //   userExist.password as string,
-    //   passwordHashed,
-    // );
+    const passwordHashed = await this.hashProvider.generateHash(password);
+    const matchPassword = await this.hashProvider.compareHash(
+      user.password as string,
+      passwordHashed,
+    );
+
+    if (!matchPassword) {
+      throw new Error('User/Password does not match');
+    }
   }
 }
