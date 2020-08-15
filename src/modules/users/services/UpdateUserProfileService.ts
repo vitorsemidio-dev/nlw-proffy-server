@@ -43,7 +43,7 @@ export default class UpdateUserProfileService {
 
     let passwordHashed;
     if (password) {
-      passwordHashed = this.hashProvice.generateHash(password);
+      passwordHashed = await this.hashProvice.generateHash(password);
     }
 
     await db('users')
