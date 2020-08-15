@@ -5,7 +5,7 @@
   "author": "Vitor Emidio <vitorsemidio.96@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "tsnd --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
+    "start": "tsnd -r tsconfig-paths/register --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
     "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback",
     "lint": "eslint --fix --ext .ts ./src"
@@ -23,6 +23,7 @@
     "eslint-plugin-prettier": "^3.1.3",
     "prettier": "^2.0.5",
     "ts-node-dev": "^1.0.0-pre.56",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.7"
   },
   "dependencies": {
