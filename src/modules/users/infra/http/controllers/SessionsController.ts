@@ -10,11 +10,17 @@ export default class SessionsController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body;
 
-    await sessionsService.execute({
-      email,
-      password,
-    });
+    try {
+      await sessionsService.execute({
+        email,
+        password,
+      });
 
-    return response.json();
+      return response.status(200).send();
+    } catch (err) {
+      return response.json({
+        message: err.message,
+      });
+    }
   }
 }
