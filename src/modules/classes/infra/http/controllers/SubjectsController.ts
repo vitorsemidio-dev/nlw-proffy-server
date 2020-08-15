@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-import db from '../../../../../shared/infra/knex/connections';
-import CreateSubjectsService from '../../../services/CreateSubjectsService';
+import db from '@shared/infra/knex/connections';
+import CreateSubjectsService from '@modules/classes/services/CreateSubjectsService';
 
 const createSubjectsService = new CreateSubjectsService();
 

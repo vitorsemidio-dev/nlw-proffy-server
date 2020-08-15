@@ -1,6 +1,7 @@
-import db from '../../../shared/infra/knex/connections';
+import db from '@shared/infra/knex/connections';
+import IHashProvider from '@shared/container/providers/HashProvider/models/IHashProviders';
+
 import CreateUserDTO from '../dtos/CreateUserDTO';
-import IHashProvider from '../../../shared/container/providers/HashProvider/models/IHashProviders';
 
 export default class CreateUsersService {
   constructor(private hashProvider: IHashProvider) {}

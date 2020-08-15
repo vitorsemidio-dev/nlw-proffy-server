@@ -1,6 +1,6 @@
-import db from '../../../shared/infra/knex/connections';
+import db from '@shared/infra/knex/connections';
 
-import convertHourToMinutes from '../../../utils/convertHourToMinutes';
+import convertHourToMinutes from '@utils/convertHourToMinutes';
 
 interface ISchedule {
   week_day: number;

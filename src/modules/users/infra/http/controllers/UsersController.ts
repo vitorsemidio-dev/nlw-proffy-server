@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-import BCryptHashProvider from '../../../../../shared/container/providers/HashProvider/implementations/BCryptHashProvider';
-import CreateUsersService from '../../../services/CreateUsersService';
+import BCryptHashProvider from '@shared/container/providers/HashProvider/implementations/BCryptHashProvider';
+import CreateUsersService from '@modules/users/services/CreateUsersService';
 
 const createUsersService = new CreateUsersService(new BCryptHashProvider());
 
