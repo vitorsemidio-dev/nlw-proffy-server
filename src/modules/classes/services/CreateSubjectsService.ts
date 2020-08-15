@@ -1,4 +1,4 @@
-import db from '../../../shared/infra/knex/connections';
+import db from '@shared/infra/knex/connections';
 
 interface IRequest {
   name: string;
