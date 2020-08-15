@@ -18,7 +18,7 @@ export default class SessionsController {
 
       return response.status(200).send();
     } catch (err) {
-      return response.json({
+      return response.status(400).json({
         message: err.message,
       });
     }

@@ -23,10 +23,9 @@ export default class SessionsService {
       throw new Error('User/Password does not match');
     }
 
-    const passwordHashed = await this.hashProvider.generateHash(password);
     const matchPassword = await this.hashProvider.compareHash(
-      user.password as string,
-      passwordHashed,
+      password,
+      user.password,
     );
 
     if (!matchPassword) {
