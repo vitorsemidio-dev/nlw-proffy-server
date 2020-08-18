@@ -6,20 +6,20 @@ interface IRequest {
 
 export default class ForgotPasswordService {
   public async execute({ email }: IRequest): Promise<string> {
-    try {
-      const token = 'token';
+    const token = 'token';
 
-      const user = await db
-        .select('*')
-        .from('users')
-        .where('email', email)
-        .first();
+    const user = await db
+      .select('*')
+      .from('users')
+      .where('email', email)
+      .first();
 
-      console.log(user);
+    console.log(user);
 
-      return token;
-    } catch (_err) {
+    if (!user) {
       throw new Error('User does not exist');
     }
+
+    return token;
   }
 }

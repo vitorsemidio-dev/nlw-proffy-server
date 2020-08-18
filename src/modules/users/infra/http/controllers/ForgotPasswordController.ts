@@ -12,7 +12,7 @@ export default class ForgotPasswordController {
       const token = await forgotPasswordService.execute({ email });
       return response.json({ token });
     } catch (err) {
-      return response.json({
+      return response.status(404).json({
         message: err.message,
       });
     }
