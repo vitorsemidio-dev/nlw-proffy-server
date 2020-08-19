@@ -14,6 +14,8 @@ export default class ForgotPasswordService {
       .where('email', email)
       .first();
 
+    await db('tokens').where('user_id', user.id).delete();
+
     console.log(user);
 
     const [token_id] = await db('tokens').insert({

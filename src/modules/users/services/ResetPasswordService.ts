@@ -36,5 +36,7 @@ export default class ResetPasswordService {
     await db('users')
       .where('email', '=', email)
       .update('password', passwordHashed);
+
+    await db('tokens').where('user_id', checkUser.id).delete();
   }
 }
