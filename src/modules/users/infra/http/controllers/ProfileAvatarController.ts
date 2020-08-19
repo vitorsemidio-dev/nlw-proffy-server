@@ -10,13 +10,19 @@ const updateProfileAvatarService = new UpdateProfileAvatarService(
 
 export default class ProfileAvatarController {
   public async update(request: Request, response: Response): Promise<Response> {
-    const { user_id } = request.body;
-    const avatarFilename = request.file.filename;
+    try {
+      const { user_id } = request.body;
+      const avatarFilename = request.file.filename;
 
-    await updateProfileAvatarService.execute({
-      user_id,
-      avatarFilename,
-    });
-    return response.json();
+      await updateProfileAvatarService.execute({
+        user_id,
+        avatarFilename,
+      });
+      return response.json();
+    } catch (err) {
+      return response.status(400).json({
+        message: err.message,
+      });
+    }
   }
 }

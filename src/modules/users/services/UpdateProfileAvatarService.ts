@@ -14,7 +14,7 @@ export default class UpdateProfileAvatarService {
     const user = await db
       .select('*')
       .from('users')
-      .where('user_id', user_id)
+      .where('id', user_id)
       .first();
 
     if (!user) {
