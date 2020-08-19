@@ -6,29 +6,35 @@ interface IRequest {
 
 export default class ForgotPasswordService {
   public async execute({ email }: IRequest): Promise<number> {
-    const token = Math.floor(Math.random() * 1000);
+    const trx = await db.transaction();
+    try {
+      const token = Math.floor(Math.random() * 1000);
 
-    const user = await db
-      .select('*')
-      .from('users')
-      .where('email', email)
-      .first();
+      const user = await trx
+        .select('*')
+        .from('users')
+        .where('email', email)
+        .first();
 
-    await db('tokens').where('user_id', user.id).delete();
+      if (!user) {
+        throw new Error('User does not exist');
+      }
 
-    console.log(user);
+      await trx('tokens').where('user_id', user.id).delete();
 
-    const [token_id] = await db('tokens').insert({
-      token,
-      user_id: user.id,
-    });
+      console.log(user);
 
-    console.log(token_id);
+      await trx('tokens').insert({
+        token,
+        user_id: user.id,
+      });
 
-    if (!user) {
-      throw new Error('User does not exist');
+      trx.commit();
+
+      return token;
+    } catch (err) {
+      trx.rollback();
+      throw new Error('Fail to forgot password');
     }
-
-    return token;
   }
 }
