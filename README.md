@@ -1,12 +1,24 @@
 # Funcionalidades
 
-## Conexões
+## Usuário
 
-- Rota para listar o total de conexões realizadas
-- Rota para criar uma nova conexão
+- [x] Criar usuário
+- [x] Atualizar avatar do usuário
+- [x] Atualizar dados do perfil
+- [x] Esqueci minha senha
+- [x] Reset da senha
+- [x] Login
+- [ ] Geração token jwt
 
 ## Aulas
 
-- Rota para criar uma aula;
-- Listar aulas
-  - Filtrar por matéria, dia da semana e horário
+- [x] Criar matéria
+- [x] Criar agendamento
+
+## Genérico
+
+- [ ] Validação nas rotas
+- [ ] Testes
+- [ ] Template de e-mail
+- [ ] Middlewares
+- [ ] Erros

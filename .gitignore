@@ -3,3 +3,7 @@
 database.sqlite
 
 .vscode/settings.json
+
+tmp/*
+tmp/uploads/*
+!tmp/uploads/.gitkeep
