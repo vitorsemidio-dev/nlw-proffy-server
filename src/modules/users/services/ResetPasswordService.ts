@@ -4,13 +4,13 @@ import IHashProvider from '@shared/container/providers/HashProvider/models/IHash
 interface IRequest {
   token: number;
   email: string;
-  password: string;
+  newPassword: string;
 }
 
 export default class ResetPasswordService {
   constructor(private hashProvider: IHashProvider) {}
 
-  public async execute({ token, password, email }: IRequest): Promise<void> {
+  public async execute({ token, newPassword, email }: IRequest): Promise<void> {
     const checkUser = await db
       .select('*')
       .from('users')
@@ -31,7 +31,7 @@ export default class ResetPasswordService {
       throw new Error('Invalid token');
     }
 
-    const passwordHashed = await this.hashProvider.generateHash(password);
+    const passwordHashed = await this.hashProvider.generateHash(newPassword);
 
     await db('users')
       .where('email', '=', email)
