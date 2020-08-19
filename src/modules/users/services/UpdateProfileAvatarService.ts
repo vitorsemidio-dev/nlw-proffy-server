@@ -4,13 +4,13 @@ import IStorageProvider from '@shared/container/providers/StorageProvider/models
 
 interface IRequest {
   user_id: number;
-  file: string;
+  avatarFilename: string;
 }
 
 export default class UpdateProfileAvatarService {
   constructor(private storageProvider: IStorageProvider) {}
 
-  public async execute({ file, user_id }: IRequest): Promise<void> {
+  public async execute({ avatarFilename, user_id }: IRequest): Promise<void> {
     const user = await db
       .select('*')
       .from('users')
@@ -25,7 +25,7 @@ export default class UpdateProfileAvatarService {
       await this.storageProvider.deleteFile(user.avatar);
     }
 
-    const filename = await this.storageProvider.saveFile(file);
+    const filename = await this.storageProvider.saveFile(avatarFilename);
 
     await db('users').where('id', '=', user_id).update('avatar', filename);
   }
