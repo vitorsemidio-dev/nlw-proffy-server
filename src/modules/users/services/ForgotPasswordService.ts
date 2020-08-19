@@ -5,8 +5,8 @@ interface IRequest {
 }
 
 export default class ForgotPasswordService {
-  public async execute({ email }: IRequest): Promise<string> {
-    const token = 'token';
+  public async execute({ email }: IRequest): Promise<number> {
+    const token = Math.floor(Math.random() * 1000);
 
     const user = await db
       .select('*')
@@ -15,6 +15,13 @@ export default class ForgotPasswordService {
       .first();
 
     console.log(user);
+
+    const [token_id] = await db('tokens').insert({
+      token,
+      user_id: user.id,
+    });
+
+    console.log(token_id);
 
     if (!user) {
       throw new Error('User does not exist');
